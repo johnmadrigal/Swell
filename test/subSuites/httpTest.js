@@ -174,7 +174,7 @@ module.exports = () => {
               } catch(err) {
                 console.error(err)
               }
-            }, 700)
+            }, 5000)
           );
         } catch(err) {
           console.error(err)
@@ -203,7 +203,7 @@ module.exports = () => {
               } catch(err) {
                 console.error(err)
               }
-            }, 700)
+            }, 5000)
           );
         } catch(err) {
           console.error(err)
@@ -231,7 +231,7 @@ module.exports = () => {
               } catch(err) {
                 console.error(err)
               }
-            }, 700)
+            }, 5000)
           );
         } catch(err) {
           console.error(err)
@@ -259,7 +259,7 @@ module.exports = () => {
               } catch(err) {
                 console.error(err)
               }
-            }, 700)
+            }, 5000)
           );
           await reqRes.removeBtn.click();
           await sideBar.chooseGet.click();
@@ -275,7 +275,7 @@ module.exports = () => {
               } catch(err) {
                 console.error(err)
               }
-            }, 700)
+            }, 5000)
           );
         } catch(err) {
           console.error(err)
