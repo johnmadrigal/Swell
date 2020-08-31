@@ -141,7 +141,7 @@ module.exports = () => {
               } catch(err) {
                 console.error(err)
               }
-            }, 700)
+            }, 2500)
           );
         } catch(err) {
           console.error(err)
