@@ -100,6 +100,7 @@ module.exports = () => {
         try {
           await sideBar.chooseGet.click();
           await urlAndClick("http://localhost:3000/book", "GET");
+          console.log('complete urlandclick');
           await new Promise((resolve) =>
             setTimeout(async () => {
               try {
@@ -113,7 +114,7 @@ module.exports = () => {
               } catch(err) {
                 console.error(err)
               }
-            }, 1000)
+            }, 2000)
           );
         } catch(err) {
           console.error(err)
