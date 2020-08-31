@@ -60,9 +60,7 @@ module.exports = () => {
             setTimeout(async () => {
               try {
                 const statusCode = await reqRes.statusCode.getText();
-                console.log('got to JSON pretty');
                 const jsonPretty = await reqRes.jsonPretty.getText();
-                console.log('after jsonPretty');
                 expect(statusCode).to.equal("Status: 200");
                 expect(jsonPretty).to.include("bulbasaur");
                 resolve();
@@ -106,7 +104,9 @@ module.exports = () => {
             setTimeout(async () => {
               try {
                 const statusCode = await reqRes.statusCode.getText();
+                console.log('got to JSON pretty');
                 const jsonPretty = await reqRes.jsonPretty.getText();
+                console.log('after jsonPretty');
                 expect(statusCode).to.equal("Status: 200");
                 expect(jsonPretty).to.equal("[]");
                 resolve();
