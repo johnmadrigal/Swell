@@ -207,7 +207,7 @@ module.exports = () => {
 
       it("it should PATCH to local API given a param", async () => {
         try {
-          await urlAndClick(
+          const click = await urlAndClick(
             "http://localhost:3000/book/HarryPotter",
             "PATCH",
             `{"author": "Hermoine Granger"}`,
@@ -235,7 +235,7 @@ module.exports = () => {
 
       it("it should DELETE in local API given a param", async () => {
         try {
-          await urlAndClick(
+          const click = await urlAndClick(
             "http://localhost:3000/book/HarryPotter",
             "DELETE",
             `{}`,
