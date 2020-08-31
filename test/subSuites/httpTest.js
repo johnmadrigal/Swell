@@ -124,11 +124,12 @@ module.exports = () => {
 
       it("it should not POST without a required field", async () => {
         try {
-          await urlAndClick(
+          const clickable = await urlAndClick(
             "http://localhost:3000/book",
             "POST",
             `{"title": "HarryPotter"}`
           );
+          console.log('after post click')
           await new Promise((resolve) =>
             setTimeout(async () => {
               try {
@@ -151,12 +152,13 @@ module.exports = () => {
 
       it("it should POST to local API", async () => {
         try {
-          await urlAndClick(
+          const clicking = await urlAndClick(
             "http://localhost:3000/book",
             "POST",
             `{"title": "HarryPotter", "author": "JK Rowling", "pages": 500}`,
             "show"
           );
+          console.log('click post')
           await new Promise((resolve) =>
             setTimeout(async () => {
               try {
@@ -185,6 +187,7 @@ module.exports = () => {
             `{"author": "Ron Weasley", "pages": 400}`,
             "show"
           );
+          console.log('clicked put')
           await new Promise((resolve) =>
             setTimeout(async () => {
               try {
