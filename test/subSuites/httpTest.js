@@ -38,6 +38,7 @@ module.exports = () => {
         await sideBar.url.setValue(url);
         await sideBar.addRequestBtn.click();
         await reqRes.sendBtn.click();
+        console.log('after sendBtn click');
       } catch(err) {
         console.error(err)
       }
@@ -114,7 +115,7 @@ module.exports = () => {
               } catch(err) {
                 console.error(err)
               }
-            }, 3000)
+            }, 4000)
           );
         } catch(err) {
           console.error(err)
