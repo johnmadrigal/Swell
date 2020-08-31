@@ -36,13 +36,6 @@ module.exports = () => {
           await sideBar.bodyInput.clearElement();
           await sideBar.bodyInput.addValue(body);
         }
-<<<<<<< HEAD
-        await sideBar.url.setValue(url);
-        await sideBar.addRequestBtn.click();
-        await reqRes.sendBtn.click();
-        console.log('after sendBtn click');
-=======
->>>>>>> master
       } catch(err) {
         console.error(err)
       }
@@ -116,14 +109,9 @@ module.exports = () => {
       it("it should GET from local API", async () => {
         try {
           await sideBar.chooseGet.click();
-<<<<<<< HEAD
-          await urlAndClick("http://localhost:3000/book", "GET");
-          console.log('complete urlandclick');
-=======
           await urlAndClick("GET");
           await sideBar.url.setValue("http://localhost:3000/book");
           await addAndSend();
->>>>>>> master
           await new Promise((resolve) =>
             setTimeout(async () => {
               try {
@@ -146,17 +134,8 @@ module.exports = () => {
 
       it("it should not POST without a required field", async () => {
         try {
-<<<<<<< HEAD
-          await urlAndClick(
-            "http://localhost:3000/book",
-            "POST",
-            `{"title": "HarryPotter"}`
-          );
-          console.log('after post click')
-=======
           await urlAndClick("POST", `{"title": "HarryPotter"}`);
           await addAndSend();
->>>>>>> master
           await new Promise((resolve) =>
             setTimeout(async () => {
               try {
@@ -179,18 +158,8 @@ module.exports = () => {
 
       it("it should POST to local API", async () => {
         try {
-<<<<<<< HEAD
-          await urlAndClick(
-            "http://localhost:3000/book",
-            "POST",
-            `{"title": "HarryPotter", "author": "JK Rowling", "pages": 500}`,
-            "show"
-          );
-          console.log('click post')
-=======
           await urlAndClick("POST", `{"title": "HarryPotter", "author": "JK Rowling", "pages": 500}`, "show");
           await addAndSend();
->>>>>>> master
           await new Promise((resolve) =>
             setTimeout(async () => {
               try {
@@ -213,19 +182,9 @@ module.exports = () => {
 
       it("it should PUT to local API given a param", async () => {
         try {
-<<<<<<< HEAD
-          await urlAndClick(
-            "http://localhost:3000/book/HarryPotter",
-            "PUT",
-            `{"author": "Ron Weasley", "pages": 400}`,
-            "show"
-          );
-          console.log('clicked put')
-=======
           await urlAndClick("PUT", `{"author": "Ron Weasley", "pages": 400}`, "show");
           await sideBar.url.setValue("http://localhost:3000/book/HarryPotter");
           await addAndSend();
->>>>>>> master
           await new Promise((resolve) =>
             setTimeout(async () => {
               try {
