@@ -104,9 +104,9 @@ module.exports = () => {
             setTimeout(async () => {
               try {
                 const statusCode = await reqRes.statusCode.getText();
-                console.log('got to JSON pretty');
+                console.log('got to JSON pretty get');
                 const jsonPretty = await reqRes.jsonPretty.getText();
-                console.log('after jsonPretty');
+                console.log('after jsonPretty get');
                 expect(statusCode).to.equal("Status: 200");
                 expect(jsonPretty).to.equal("[]");
                 resolve();
@@ -131,7 +131,9 @@ module.exports = () => {
             setTimeout(async () => {
               try {
                 const statusCode = await reqRes.statusCode.getText();
+                console.log('got to JSON pretty not post');
                 const jsonPrettyError = await reqRes.jsonPrettyError.getText();
+                console.log('after JSON pretty not post');
                 expect(statusCode).to.equal("Status: 500");
                 expect(jsonPrettyError).to.include("validation failed");
                 resolve();
@@ -157,14 +159,16 @@ module.exports = () => {
             setTimeout(async () => {
               try {
                 const statusCode = await reqRes.statusCode.getText();
+                console.log('got to JSON pretty post');
                 const jsonPretty = await reqRes.jsonPretty.getText();
+                console.log('after JSON pretty post');
                 expect(statusCode).to.equal("Status: 200");
                 expect(jsonPretty).to.include("JK Rowling");
                 resolve();
               } catch(err) {
                 console.error(err)
               }
-            }, 3000)
+            }, 4500)
           );
         } catch(err) {
           console.error(err)
@@ -183,7 +187,9 @@ module.exports = () => {
             setTimeout(async () => {
               try {
                 const statusCode = await reqRes.statusCode.getText();
+                console.log('got to JSON pretty put');
                 const jsonPretty = await reqRes.jsonPretty.getText();
+                console.log('after JSON pretty put');
                 expect(statusCode).to.equal("Status: 200");
                 expect(jsonPretty).to.include("Ron Weasley");
                 resolve();
@@ -209,7 +215,9 @@ module.exports = () => {
             setTimeout(async () => {
               try {
                 const statusCode = await reqRes.statusCode.getText();
+                console.log('got to JSON pretty patch');
                 const jsonPretty = await reqRes.jsonPretty.getText();
+                console.log('after JSON pretty patch');
                 expect(statusCode).to.equal("Status: 200");
                 expect(jsonPretty).to.include("Hermoine Granger");
                 resolve();
@@ -235,7 +243,9 @@ module.exports = () => {
             setTimeout(async () => {
               try {
                 const statusCode = await reqRes.statusCode.getText();
+                console.log('got to JSON pretty delete');
                 const jsonPretty = await reqRes.jsonPretty.getText();
+                console.log('after JSON pretty delete');
                 expect(statusCode).to.equal("Status: 200");
                 expect(jsonPretty).to.include("Hermoine Granger");
                 resolve();
