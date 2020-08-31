@@ -164,7 +164,7 @@ module.exports = () => {
           const findDOM = (tries) => {
             return new Promise((resolve,reject) => {
               console.log(`Tries remaining ${tries}`)
-              if(tries === 0) reject('failed promise');
+              if(tries <= 0) reject('failed promise');
               setTimeout(async () => {
                 try {
                   const statusCode = await reqRes.statusCode.getText();
@@ -198,7 +198,7 @@ module.exports = () => {
           //   }, 10000)
           // );
         } catch(err) {
-          console.error(err)
+          console.error('error in non-post', err)
         }
       });
 
