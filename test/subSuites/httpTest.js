@@ -145,7 +145,7 @@ module.exports = () => {
               } catch(err) {
                 console.error(err)
               }
-            }, 2500)
+            }, 5000)
           );
         } catch(err) {
           console.error(err)
