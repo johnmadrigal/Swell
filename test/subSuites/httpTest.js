@@ -112,45 +112,91 @@ module.exports = () => {
           await urlAndClick("GET");
           await sideBar.url.setValue("http://localhost:3000/book");
           await addAndSend();
-          await new Promise((resolve) =>
-            setTimeout(async () => {
-              try {
-                const statusCode = await reqRes.statusCode.getText();
-                console.log('got to JSON pretty get');
-                const jsonPretty = await reqRes.jsonPretty.getText();
-                console.log('after jsonPretty get');
-                expect(statusCode).to.equal("Status: 200");
-                expect(jsonPretty).to.equal("[]");
-                resolve();
-              } catch(err) {
-                console.error(err)
-              }
-            }, 10000)
-          );
-        } catch(err) {
-          console.error(err)
-        }
-      });
+          const findDOM = (tries) => {
+            return new Promise((resolve,reject) => {
+              console.log(`Tries remaining ${tries}`)
+              if(tries === 0) reject('failed promise');
+              setTimeout(async () => {
+                try {
+                  const statusCode = await reqRes.statusCode.getText();
+                  console.log('got to JSON pretty get');
+                  const jsonPretty = await reqRes.jsonPretty.getText();
+                  console.log('after jsonPretty get');
+                  expect(statusCode).to.equal("Status: 200");
+                  expect(jsonPretty).to.equal("[]");
+                  resolve();
+                } catch (err) {
+                  console.log('err from promise try', err)
+                  findDOM(--tries)
+                }
+              }, 1000)
+            })
+          }
+          await findDOM(30)
+            // .then((msg) => console.log('success in promise'))
+            // .catch(err => console.log('failed promise',err))
+        //   await new Promise((resolve) =>
+        //     setTimeout(async () => {
+        //       try {
+        //         const statusCode = await reqRes.statusCode.getText();
+        //         console.log('got to JSON pretty get');
+        //         const jsonPretty = await reqRes.jsonPretty.getText();
+        //         console.log('after jsonPretty get');
+        //         expect(statusCode).to.equal("Status: 200");
+        //         expect(jsonPretty).to.equal("[]");
+        //         resolve();
+        //       } catch(err) {
+        //         console.error(err)
+        //       }
+        //     }, 10000)
+        //   );
+        // } catch(err) {
+        //   console.error(err)
+        // }
+      } catch (err) {
+        console.log(err)
+      }});
 
       it("it should not POST without a required field", async () => {
         try {
           await urlAndClick("POST", `{"title": "HarryPotter"}`);
           await addAndSend();
-          await new Promise((resolve) =>
-            setTimeout(async () => {
-              try {
-                const statusCode = await reqRes.statusCode.getText();
-                console.log('got to JSON pretty not post');
-                const jsonPrettyError = await reqRes.jsonPrettyError.getText();
-                console.log('after JSON pretty not post');
-                expect(statusCode).to.equal("Status: 500");
-                expect(jsonPrettyError).to.include("validation failed");
-                resolve();
-              } catch(err) {
-                console.error(err)
-              }
-            }, 10000)
-          );
+          const findDOM = (tries) => {
+            return new Promise((resolve,reject) => {
+              console.log(`Tries remaining ${tries}`)
+              if(tries === 0) reject('failed promise');
+              setTimeout(async () => {
+                try {
+                  const statusCode = await reqRes.statusCode.getText();
+                  console.log('got to JSON pretty not post');
+                  const jsonPrettyError = await reqRes.jsonPrettyError.getText();
+                  console.log('after JSON pretty not post');
+                  expect(statusCode).to.equal("Status: 500");
+                  expect(jsonPrettyError).to.include("validation failed");
+                  resolve();
+                } catch (err) {
+                  console.log('err from promise try', err)
+                  findDOM(--tries)
+                }
+              }, 1000)
+            })
+          }
+          await findDOM(35)
+          // await new Promise((resolve) =>
+          //   setTimeout(async () => {
+          //     try {
+          //       const statusCode = await reqRes.statusCode.getText();
+          //       console.log('got to JSON pretty not post');
+          //       const jsonPrettyError = await reqRes.jsonPrettyError.getText();
+          //       console.log('after JSON pretty not post');
+          //       expect(statusCode).to.equal("Status: 500");
+          //       expect(jsonPrettyError).to.include("validation failed");
+          //       resolve();
+          //     } catch(err) {
+          //       console.error(err)
+          //     }
+          //   }, 10000)
+          // );
         } catch(err) {
           console.error(err)
         }
