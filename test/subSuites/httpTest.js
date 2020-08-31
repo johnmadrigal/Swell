@@ -8,7 +8,7 @@ const expect = chai.expect;
 
 module.exports = () => {
   describe("HTTP/S requests", () => {
-    const urlAndClick = async (url, method, body, header) => {
+    const urlAndClick = async (method, body, header) => {
       try {
         console.log('inside urlandclick')
         if (method !== "GET") {
@@ -36,14 +36,26 @@ module.exports = () => {
           await sideBar.bodyInput.clearElement();
           await sideBar.bodyInput.addValue(body);
         }
+<<<<<<< HEAD
         await sideBar.url.setValue(url);
         await sideBar.addRequestBtn.click();
         await reqRes.sendBtn.click();
         console.log('after sendBtn click');
+=======
+>>>>>>> master
       } catch(err) {
         console.error(err)
       }
     };
+
+    const addAndSend = async () => {
+      try {
+        await sideBar.addRequestBtn.click();
+        await reqRes.sendBtn.click();
+      } catch(err) {
+        console.error(err);
+      }
+    }
 
     beforeEach(async () => {
       try {
@@ -58,7 +70,9 @@ module.exports = () => {
       it("it should GET information from a public API", async () => {
         try {
           await sideBar.chooseGet.click();
-          await urlAndClick("https://pokeapi.co/api/v2/pokemon?limit=5", "GET");
+          await urlAndClick("GET");
+          await sideBar.url.setValue("https://pokeapi.co/api/v2/pokemon?limit=5");
+          await addAndSend();
           await new Promise((resolve) =>
             setTimeout(async () => {
               try {
@@ -102,8 +116,14 @@ module.exports = () => {
       it("it should GET from local API", async () => {
         try {
           await sideBar.chooseGet.click();
+<<<<<<< HEAD
           await urlAndClick("http://localhost:3000/book", "GET");
           console.log('complete urlandclick');
+=======
+          await urlAndClick("GET");
+          await sideBar.url.setValue("http://localhost:3000/book");
+          await addAndSend();
+>>>>>>> master
           await new Promise((resolve) =>
             setTimeout(async () => {
               try {
@@ -126,12 +146,17 @@ module.exports = () => {
 
       it("it should not POST without a required field", async () => {
         try {
+<<<<<<< HEAD
           await urlAndClick(
             "http://localhost:3000/book",
             "POST",
             `{"title": "HarryPotter"}`
           );
           console.log('after post click')
+=======
+          await urlAndClick("POST", `{"title": "HarryPotter"}`);
+          await addAndSend();
+>>>>>>> master
           await new Promise((resolve) =>
             setTimeout(async () => {
               try {
@@ -154,6 +179,7 @@ module.exports = () => {
 
       it("it should POST to local API", async () => {
         try {
+<<<<<<< HEAD
           await urlAndClick(
             "http://localhost:3000/book",
             "POST",
@@ -161,6 +187,10 @@ module.exports = () => {
             "show"
           );
           console.log('click post')
+=======
+          await urlAndClick("POST", `{"title": "HarryPotter", "author": "JK Rowling", "pages": 500}`, "show");
+          await addAndSend();
+>>>>>>> master
           await new Promise((resolve) =>
             setTimeout(async () => {
               try {
@@ -183,6 +213,7 @@ module.exports = () => {
 
       it("it should PUT to local API given a param", async () => {
         try {
+<<<<<<< HEAD
           await urlAndClick(
             "http://localhost:3000/book/HarryPotter",
             "PUT",
@@ -190,6 +221,11 @@ module.exports = () => {
             "show"
           );
           console.log('clicked put')
+=======
+          await urlAndClick("PUT", `{"author": "Ron Weasley", "pages": 400}`, "show");
+          await sideBar.url.setValue("http://localhost:3000/book/HarryPotter");
+          await addAndSend();
+>>>>>>> master
           await new Promise((resolve) =>
             setTimeout(async () => {
               try {
@@ -212,12 +248,8 @@ module.exports = () => {
 
       it("it should PATCH to local API given a param", async () => {
         try {
-          await urlAndClick(
-            "http://localhost:3000/book/HarryPotter",
-            "PATCH",
-            `{"author": "Hermoine Granger"}`,
-            "show"
-          );
+          await urlAndClick("PATCH", `{"author": "Hermoine Granger"}`, "show");
+          await addAndSend();
           await new Promise((resolve) =>
             setTimeout(async () => {
               try {
@@ -240,12 +272,8 @@ module.exports = () => {
 
       it("it should DELETE in local API given a param", async () => {
         try {
-          await urlAndClick(
-            "http://localhost:3000/book/HarryPotter",
-            "DELETE",
-            `{}`,
-            "show"
-          );
+          await urlAndClick("DELETE", `{}`, "show");
+          await addAndSend();
           await new Promise((resolve) =>
             setTimeout(async () => {
               try {
@@ -263,7 +291,9 @@ module.exports = () => {
           );
           await reqRes.removeBtn.click();
           await sideBar.chooseGet.click();
-          await urlAndClick("http://localhost:3000/book", "GET");
+          await urlAndClick("GET");
+          await sideBar.url.setValue("http://localhost:3000/book");
+          await addAndSend();
           await new Promise((resolve) =>
             setTimeout(async () => {
               try {
