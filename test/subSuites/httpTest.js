@@ -10,6 +10,7 @@ module.exports = () => {
   describe("HTTP/S requests", () => {
     const urlAndClick = async (url, method, body, header) => {
       try {
+        console.log('inside urlandclick')
         if (method !== "GET") {
           // request method
           await sideBar.requestMethod.click();
@@ -47,6 +48,7 @@ module.exports = () => {
     beforeEach(async () => {
       try {
         await reqRes.removeBtn.click();
+        console.log('click before each remove')
       } catch(err) {
         console.error(err)
       }
@@ -124,7 +126,7 @@ module.exports = () => {
 
       it("it should not POST without a required field", async () => {
         try {
-          const clickable = await urlAndClick(
+          await urlAndClick(
             "http://localhost:3000/book",
             "POST",
             `{"title": "HarryPotter"}`
@@ -152,7 +154,7 @@ module.exports = () => {
 
       it("it should POST to local API", async () => {
         try {
-          const clicking = await urlAndClick(
+          await urlAndClick(
             "http://localhost:3000/book",
             "POST",
             `{"title": "HarryPotter", "author": "JK Rowling", "pages": 500}`,
@@ -181,7 +183,7 @@ module.exports = () => {
 
       it("it should PUT to local API given a param", async () => {
         try {
-          const clicked = await urlAndClick(
+          await urlAndClick(
             "http://localhost:3000/book/HarryPotter",
             "PUT",
             `{"author": "Ron Weasley", "pages": 400}`,
@@ -210,7 +212,7 @@ module.exports = () => {
 
       it("it should PATCH to local API given a param", async () => {
         try {
-          const click = await urlAndClick(
+          await urlAndClick(
             "http://localhost:3000/book/HarryPotter",
             "PATCH",
             `{"author": "Hermoine Granger"}`,
@@ -238,7 +240,7 @@ module.exports = () => {
 
       it("it should DELETE in local API given a param", async () => {
         try {
-          const click = await urlAndClick(
+          await urlAndClick(
             "http://localhost:3000/book/HarryPotter",
             "DELETE",
             `{}`,
