@@ -190,7 +190,7 @@ module.exports = () => {
               } catch(err) {
                 console.error(err)
               }
-            }, 3000)
+            }, 5000)
           );
         } catch(err) {
           console.error(err)
@@ -216,7 +216,7 @@ module.exports = () => {
               } catch(err) {
                 console.error(err)
               }
-            }, 3000)
+            }, 5000)
           );
         } catch(err) {
           console.error(err)
