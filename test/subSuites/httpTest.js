@@ -113,7 +113,7 @@ module.exports = () => {
               } catch(err) {
                 console.error(err)
               }
-            }, 700)
+            }, 1000)
           );
         } catch(err) {
           console.error(err)
