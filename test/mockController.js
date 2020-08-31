@@ -13,6 +13,7 @@ bookController.clearDB = (req, res, next) => {
 }
 
 bookController.getAll = (req, res, next) => {
+	console.log('got to book controller');
 	db.BookStore.find({}, (err, books) => {
     if (err) {
       next(err);
