@@ -179,7 +179,7 @@ module.exports = () => {
 
       it("it should PUT to local API given a param", async () => {
         try {
-          await urlAndClick(
+          const clicked = await urlAndClick(
             "http://localhost:3000/book/HarryPotter",
             "PUT",
             `{"author": "Ron Weasley", "pages": 400}`,
