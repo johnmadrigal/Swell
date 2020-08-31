@@ -11,7 +11,7 @@ mongoose.connect(mongoURI, {
   // sets the name of the DB that our collections are part of
   // dbName: 'swell'
 })
-.then(()=>console.log('Connected to Mongo DB.'))
+.then(()=>console.log(`Connected to Mongo DB. ${mongoURI}`))
 .catch(err=>console.log(err));
 
 const Schema = mongoose.Schema;
