@@ -333,39 +333,77 @@ module.exports = () => {
         try {
           await urlAndClick("DELETE", `{}`, "show");
           await addAndSend();
-          await new Promise((resolve) =>
-            setTimeout(async () => {
-              try {
-                const statusCode = await reqRes.statusCode.getText();
-                console.log('got to JSON pretty delete');
-                const jsonPretty = await reqRes.jsonPretty.getText();
-                console.log('after JSON pretty delete');
-                expect(statusCode).to.equal("Status: 200");
-                expect(jsonPretty).to.include("Hermoine Granger");
-                resolve();
-              } catch(err) {
-                console.error(err)
-              }
-            }, 10000)
-          );
+          const findDOM = (tries) => {
+            return new Promise((resolve,reject) => {
+              console.log(`Tries remaining ${tries}`)
+              if(tries <= 0) resolve();
+              setTimeout(async () => {
+                try {
+                  const statusCode = await reqRes.statusCode.getText();
+                  console.log('got to JSON pretty delete');
+                  const jsonPretty = await reqRes.jsonPretty.getText();
+                  console.log('after JSON pretty delete');
+                  expect(statusCode).to.equal("Status: 200");
+                  expect(jsonPretty).to.include("Hermoine Granger");
+                  return resolve();
+                } catch(err) {
+                  await findDOM(--tries)
+                  return resolve()
+                }
+              }, 1000)
+            })
+          }
+          // await new Promise((resolve) =>
+          //   setTimeout(async () => {
+          //     try {
+          //       const statusCode = await reqRes.statusCode.getText();
+          //       console.log('got to JSON pretty delete');
+          //       const jsonPretty = await reqRes.jsonPretty.getText();
+          //       console.log('after JSON pretty delete');
+          //       expect(statusCode).to.equal("Status: 200");
+          //       expect(jsonPretty).to.include("Hermoine Granger");
+          //       resolve();
+          //     } catch(err) {
+          //       console.error(err)
+          //     }
+          //   }, 10000)
+          // );
           await reqRes.removeBtn.click();
           await sideBar.chooseGet.click();
           await urlAndClick("GET");
           await sideBar.url.setValue("http://localhost:3000/book");
           await addAndSend();
-          await new Promise((resolve) =>
-            setTimeout(async () => {
-              try {
-                const statusCode = await reqRes.statusCode.getText();
-                const jsonPretty = await reqRes.jsonPretty.getText();
-                expect(statusCode).to.equal("Status: 200");
-                expect(jsonPretty).to.equal("[]");
-                resolve();
-              } catch(err) {
-                console.error(err)
-              }
-            }, 10000)
-          );
+          const findDOM2 = (tries) => {
+            return new Promise((resolve,reject) => {
+              console.log(`Tries remaining ${tries}`)
+              if(tries <= 0) resolve();
+              setTimeout(async () => {
+                try {
+                  const statusCode = await reqRes.statusCode.getText();
+                  const jsonPretty = await reqRes.jsonPretty.getText();
+                  expect(statusCode).to.equal("Status: 200");
+                  expect(jsonPretty).to.equal("[]");
+                  return resolve();
+                } catch(err) {
+                  await findDOM2(--tries)
+                  return resolve()
+                }
+              }, 1000)
+            })
+          }
+          // await new Promise((resolve) =>
+          //   setTimeout(async () => {
+          //     try {
+          //       const statusCode = await reqRes.statusCode.getText();
+          //       const jsonPretty = await reqRes.jsonPretty.getText();
+          //       expect(statusCode).to.equal("Status: 200");
+          //       expect(jsonPretty).to.equal("[]");
+          //       resolve();
+          //     } catch(err) {
+          //       console.error(err)
+          //     }
+          //   }, 10000)
+          // );
         } catch(err) {
           console.error(err)
         }
