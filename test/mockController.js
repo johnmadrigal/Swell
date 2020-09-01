@@ -13,19 +13,16 @@ bookController.clearDB = (req, res, next) => {
 }
 
 bookController.getAll = (req, res, next) => {
-	console.log('got to book controller');
 	db.BookStore.find({}, (err, books) => {
     if (err) {
       next(err);
     }
     res.locals.books = books;
-    // console.log(books);
     next();
   })
 }
 
 bookController.addBook = (req, res, next) => {
-	console.log('inside add book');
 	const { title, author, pages } = req.body;
 	db.BookStore.create({ title, author, pages }, (err, books) => {
     if (err) {
@@ -37,7 +34,6 @@ bookController.addBook = (req, res, next) => {
 }
 
 bookController.updateEntireBook = (req, res, next) => {
-	console.log('inside update book controller')
 	const { title } = req.params;
 	const { author, pages } = req.body;
 	db.BookStore.replaceOne({ title }, { title, author, pages }, (err, books) => {
@@ -51,7 +47,6 @@ bookController.updateEntireBook = (req, res, next) => {
 				}
 
 				res.locals.books = books;
-				console.log('updated book');
 				next();
 			})
 		}
@@ -59,7 +54,6 @@ bookController.updateEntireBook = (req, res, next) => {
 }
 
 bookController.patchBook = (req, res, next) => {
-	console.log('inside patch book controller')
 	const { title } = req.params;
 	const { author } = req.body;
 	db.BookStore.findOneAndUpdate({ title }, { title, author }, {new: true}, (err, books) => {
@@ -72,14 +66,12 @@ bookController.patchBook = (req, res, next) => {
 }
 
 bookController.deleteBook = (req, res, next) => {
-	console.log('inside delete book')
 	const { title } = req.params;
 	db.BookStore.findOneAndDelete({ title }, (err, books) => {
     if (err) {
       next(err);
     }
 		res.locals.books = books;
-		console.log('before delete next')
     next();
 	})
 }

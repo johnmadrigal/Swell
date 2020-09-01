@@ -62,12 +62,7 @@ module.exports = () => {
 
     after(async () => {
       try {
-        await new Promise( (resolve) => {
-          setTimeout( () => {
-            httpServer.close();
-            return resolve();
-          }, 5000)
-        })
+        httpServer.close();
       } catch(err) {
         console.error(err)
       }
@@ -101,6 +96,12 @@ module.exports = () => {
 
     /***************** !! FOR BELOW TO WORK, YOU MUST ADD YOUR OWN MONGO URI TO A .ENV FILE WITH (MONGO_URI = "YOUR_URI") !! *****************/
     //conditional to not run during travis env
+    /*
+    Travis and linux testing currently has a problem running http requests
+    I created a wrapper functions called findDOM to listen for the request
+    It was inconsistent, but it would get all the way to the delete test before failing
+    If you can push this forward or solve that final piece, CI would be fully integrated 
+    */
     if(!process.env.TRAVIS_LOCAL_API) {
     describe("local API", () => {
       before("CLEAR DB", (done) => {
@@ -120,7 +121,7 @@ module.exports = () => {
             done();
           });
       });
-      //create findDOM functions as a wrapper to attempt to findDOM response for travis
+      //created findDOM functions as a wrapper to attempt to findDOM response for travis
       it("it should GET from local API", async () => {
         try {
           await sideBar.chooseGet.click();
