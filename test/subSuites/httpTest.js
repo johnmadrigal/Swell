@@ -75,7 +75,7 @@ module.exports = () => {
                 expect(jsonPretty).to.include("bulbasaur");
                 resolve();
               } catch(err) {
-                console.error(err)
+                console.error(err);
               }
             }, 700)
           );
@@ -105,7 +105,7 @@ module.exports = () => {
             done();
           });
       });
-
+      //create findDOM functions as a wrapper to attempt to findDOM response for travis
       it("it should GET from local API", async () => {
         try {
           await sideBar.chooseGet.click();
@@ -114,7 +114,7 @@ module.exports = () => {
           await addAndSend();
           const findDOM = (tries) => {
             return new Promise( (resolve, reject) => {
-              console.log(`Tries remaining ${tries}`)
+              console.log(`Tries remaining for GET ${tries}`)
               if(tries <= 0) return resolve();
               setTimeout(async () => {
                 try {
@@ -131,26 +131,6 @@ module.exports = () => {
             })
           }
           await findDOM(30)
-            // .then((msg) => console.log('success in promise'))
-            // .catch(err => console.log('failed promise',err))
-        //   await new Promise((resolve) =>
-        //     setTimeout(async () => {
-        //       try {
-        //         const statusCode = await reqRes.statusCode.getText();
-        //         console.log('got to JSON pretty get');
-        //         const jsonPretty = await reqRes.jsonPretty.getText();
-        //         console.log('after jsonPretty get');
-        //         expect(statusCode).to.equal("Status: 200");
-        //         expect(jsonPretty).to.equal("[]");
-        //         resolve();
-        //       } catch(err) {
-        //         console.error(err)
-        //       }
-        //     }, 10000)
-        //   );
-        // } catch(err) {
-        //   console.error(err)
-        // }
       } catch (err) {
         console.log(err)
       }});
@@ -161,7 +141,7 @@ module.exports = () => {
           await addAndSend();
           const findDOM = (tries) => {
             return new Promise((resolve,reject) => {
-              console.log(`Tries remaining ${tries}`)
+              console.log(`Tries remaining for no POST ${tries}`)
               if(tries <= 0) return resolve();
               setTimeout(async () => {
                 try {
@@ -178,21 +158,6 @@ module.exports = () => {
             })
           }
           await findDOM(100)
-          // await new Promise((resolve) =>
-          //   setTimeout(async () => {
-          //     try {
-          //       const statusCode = await reqRes.statusCode.getText();
-          //       console.log('got to JSON pretty not post');
-          //       const jsonPrettyError = await reqRes.jsonPrettyError.getText();
-          //       console.log('after JSON pretty not post');
-          //       expect(statusCode).to.equal("Status: 500");
-          //       expect(jsonPrettyError).to.include("validation failed");
-          //       resolve();
-          //     } catch(err) {
-          //       console.error(err)
-          //     }
-          //   }, 10000)
-          // );
         } catch(err) {
           console.error('error in non-post', err);
         }
@@ -204,7 +169,7 @@ module.exports = () => {
           await addAndSend();
           const findDOM = (tries) => {
             return new Promise((resolve,reject) => {
-              console.log(`Tries remaining ${tries}`)
+              console.log(`Tries remaining for POST ${tries}`)
               if(tries <= 0) return resolve();
               setTimeout(async () => {
                 try {
@@ -221,21 +186,6 @@ module.exports = () => {
             })
           }
           await findDOM(100)
-          // await new Promise((resolve) =>
-          //   setTimeout(async () => {
-          //     try {
-          //       const statusCode = await reqRes.statusCode.getText();
-          //       console.log('got to JSON pretty post');
-          //       const jsonPretty = await reqRes.jsonPretty.getText();
-          //       console.log('after JSON pretty post');
-          //       expect(statusCode).to.equal("Status: 200");
-          //       expect(jsonPretty).to.include("JK Rowling");
-          //       resolve();
-          //     } catch(err) {
-          //       console.error(err)
-          //     }
-          //   }, 10000)
-          // );
         } catch(err) {
           console.error(err)
         }
@@ -248,7 +198,7 @@ module.exports = () => {
           await addAndSend();
           const findDOM = (tries) => {
             return new Promise((resolve,reject) => {
-              console.log(`Tries remaining ${tries}`)
+              console.log(`Tries remaining for PUT ${tries}`)
               if(tries <= 0) return resolve();
               setTimeout(async () => {
                 try {
@@ -259,28 +209,13 @@ module.exports = () => {
                   console.log('going to resolve');
                   return resolve();
                 } catch(err) {
-                  await findDOM(--tries)
-                  return resolve()
+                  await findDOM(--tries);
+                  return resolve();
                 }
               }, 1000)
             })
           }
-          await findDOM(100)
-          // await new Promise((resolve) =>
-            // setTimeout(async () => {
-            //   try {
-            //     const statusCode = await reqRes.statusCode.getText();
-            //     console.log('got to JSON pretty put');
-            //     const jsonPretty = await reqRes.jsonPretty.getText();
-            //     console.log('after JSON pretty put');
-            //     expect(statusCode).to.equal("Status: 200");
-            //     expect(jsonPretty).to.include("Ron Weasley");
-            //     resolve();
-            //   } catch(err) {
-            //     console.error(err)
-            //   }
-            // }, 10000)
-          // );
+          await findDOM(100);
         } catch(err) {
           console.error(err)
         }
@@ -292,7 +227,7 @@ module.exports = () => {
           await addAndSend();
           const findDOM = (tries) => {
             return new Promise((resolve,reject) => {
-              console.log(`Tries remaining ${tries}`)
+              console.log(`Tries remaining for PATCH ${tries}`)
               if(tries <= 0) return resolve();
               setTimeout(async () => {
                 try {
@@ -302,30 +237,15 @@ module.exports = () => {
                   expect(jsonPretty).to.include("Hermoine Granger");
                   return resolve();
                 } catch(err) {
-                  await findDOM(--tries)
-                  return resolve()
+                  await findDOM(--tries);
+                  return resolve();
                 }
               }, 1000)
             })
           }
-          await findDOM(100)
-          // await new Promise((resolve) =>
-          //   setTimeout(async () => {
-          //     try {
-          //       const statusCode = await reqRes.statusCode.getText();
-          //       console.log('got to JSON pretty patch');
-          //       const jsonPretty = await reqRes.jsonPretty.getText();
-          //       console.log('after JSON pretty patch');
-          //       expect(statusCode).to.equal("Status: 200");
-          //       expect(jsonPretty).to.include("Hermoine Granger");
-          //       resolve();
-          //     } catch(err) {
-          //       console.error(err)
-          //     }
-          //   }, 10000)
-          // );
+          await findDOM(100);
         } catch(err) {
-          console.error(err)
+          console.error(err);
         }
       });
 
@@ -335,7 +255,7 @@ module.exports = () => {
           await addAndSend();
           const findDOM = (tries) => {
             return new Promise((resolve,reject) => {
-              console.log(`Tries remaining ${tries}`)
+              console.log(`Tries remaining for DELETE ${tries}`)
               if(tries <= 0) return resolve();
               setTimeout(async () => {
                 try {
@@ -347,27 +267,13 @@ module.exports = () => {
                   expect(jsonPretty).to.include("Hermoine Granger");
                   return resolve();
                 } catch(err) {
-                  await findDOM(--tries)
-                  return resolve()
+                  await findDOM(--tries);
+                  return resolve();
                 }
               }, 1000)
             })
           }
-          // await new Promise((resolve) =>
-          //   setTimeout(async () => {
-          //     try {
-          //       const statusCode = await reqRes.statusCode.getText();
-          //       console.log('got to JSON pretty delete');
-          //       const jsonPretty = await reqRes.jsonPretty.getText();
-          //       console.log('after JSON pretty delete');
-          //       expect(statusCode).to.equal("Status: 200");
-          //       expect(jsonPretty).to.include("Hermoine Granger");
-          //       resolve();
-          //     } catch(err) {
-          //       console.error(err)
-          //     }
-          //   }, 10000)
-          // );
+          await findDOM(100);
           await reqRes.removeBtn.click();
           await sideBar.chooseGet.click();
           await urlAndClick("GET");
@@ -375,7 +281,7 @@ module.exports = () => {
           await addAndSend();
           const findDOM2 = (tries) => {
             return new Promise((resolve,reject) => {
-              console.log(`Tries remaining ${tries}`)
+              console.log(`Tries remaining for DELETE PT2 ${tries}`)
               if(tries <= 0) return resolve();
               setTimeout(async () => {
                 try {
@@ -385,27 +291,15 @@ module.exports = () => {
                   expect(jsonPretty).to.equal("[]");
                   return resolve();
                 } catch(err) {
-                  await findDOM2(--tries)
-                  return resolve()
+                  await findDOM2(--tries);
+                  return resolve();
                 }
               }, 1000)
             })
           }
-          // await new Promise((resolve) =>
-          //   setTimeout(async () => {
-          //     try {
-          //       const statusCode = await reqRes.statusCode.getText();
-          //       const jsonPretty = await reqRes.jsonPretty.getText();
-          //       expect(statusCode).to.equal("Status: 200");
-          //       expect(jsonPretty).to.equal("[]");
-          //       resolve();
-          //     } catch(err) {
-          //       console.error(err)
-          //     }
-          //   }, 10000)
-          // );
+          await findDOM2(100);
         } catch(err) {
-          console.error(err)
+          console.error(err);
         }
       });
     });
