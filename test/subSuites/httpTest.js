@@ -167,7 +167,7 @@ module.exports = () => {
               }, 1000)
             })
           }
-          await findDOM(100)
+          await findDOM(100);
         } catch(err) {
           console.error('error in non-post', err);
         }
