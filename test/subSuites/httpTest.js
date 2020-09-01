@@ -249,7 +249,7 @@ module.exports = () => {
           const findDOM = (tries) => {
             return new Promise((resolve,reject) => {
               console.log(`Tries remaining ${tries}`)
-              if(tries <= 0) resolve();
+              if(tries <= 0) return resolve();
               setTimeout(async () => {
                 try {
                   const statusCode = await reqRes.statusCode.getText();
