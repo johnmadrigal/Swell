@@ -13,7 +13,6 @@ module.exports = () => {
   describe("HTTP/S requests", () => {
     const urlAndClick = async (method, body, header) => {
       try {
-        console.log('inside urlandclick')
         if (method !== "GET") {
           // request method
           await sideBar.requestMethod.click();
@@ -56,7 +55,6 @@ module.exports = () => {
     beforeEach(async () => {
       try {
         await reqRes.removeBtn.click();
-        console.log('click before each remove')
       } catch(err) {
         console.error(err)
       }
@@ -66,12 +64,10 @@ module.exports = () => {
       try {
         await new Promise( (resolve) => {
           setTimeout( () => {
-            console.log('blocking');
             httpServer.close();
             return resolve();
           }, 5000)
         })
-         console.log('httpServer closed')
       } catch(err) {
         console.error(err)
       }
