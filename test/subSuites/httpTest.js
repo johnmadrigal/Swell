@@ -295,12 +295,12 @@ module.exports = () => {
               if(attempts <= 0) return resolve();
               setTimeout(async () => {
                 try {
-                  const statusCode = await reqRes.statusCode.getText();
+                  const statusCode1 = await reqRes.statusCode.getText();
                   console.log('jsonpretty delete2');
-                  const jsonPretty = await reqRes.jsonPretty.getText();
+                  const jsonPretty1 = await reqRes.jsonPretty.getText();
                   console.log('jsonpretty delete2 after');
-                  expect(statusCode).to.equal("Status: 200");
-                  expect(jsonPretty).to.equal("[]");
+                  expect(statusCode1).to.equal("Status: 200");
+                  expect(jsonPretty1).to.equal("[]");
                   console.log('jsonpretty', jsonPretty);
                   return resolve();
                 } catch(err) {
