@@ -259,7 +259,7 @@ module.exports = () => {
                   console.log('after JSON pretty put');
                   expect(statusCode).to.equal("Status: 200");
                   expect(jsonPretty).to.include("Ron Weasley");
-                  resolve();
+                  return resolve();
                 } catch(err) {
                   await findDOM(--tries)
                   resolve()
