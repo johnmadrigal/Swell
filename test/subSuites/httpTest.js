@@ -296,8 +296,8 @@ module.exports = () => {
           await urlAndClick("GET");
           await sideBar.url.setValue("http://localhost:3000/book");
           await addAndSend();
-          const findDOM2 = (attempts) => {
-            return new Promise((resolve,reject) => {
+          const findDOM2 = attempts => {
+            return new Promise((resolve) => {
               console.log(`Tries remaining for DELETE PT2 ${attempts}`)
               if(attempts <= 0) return resolve();
               setTimeout(async () => {
@@ -307,7 +307,7 @@ module.exports = () => {
                   console.log('jsonpretty delete2 after');
                   expect(statusCode1).to.equal("Status: 200");
                   expect(jsonPretty1).to.equal("[]");
-                  console.log('jsonpretty', jsonPretty);
+                  console.log('jsonpretty', jsonPretty1);
                   return resolve();
                 } catch(err) {
                   await findDOM2(--attempts);
