@@ -51,6 +51,7 @@ bookController.updateEntireBook = (req, res, next) => {
 				}
 
 				res.locals.books = books;
+				console.log('updated book');
 				next();
 			})
 		}
