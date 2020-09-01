@@ -60,9 +60,15 @@ module.exports = () => {
       }
     });
 
-    after(() => {
+    after(async () => {
       try {
-         httpServer.close();
+        await new Promise( (resolve) => {
+          setTimeout( () => {
+            console.log('blocking');
+            httpServer.close();
+            return resolve();
+          }, 5000)
+        })
          console.log('httpServer closed')
       } catch(err) {
         console.error(err)
@@ -297,7 +303,6 @@ module.exports = () => {
               setTimeout(async () => {
                 try {
                   const statusCode1 = await reqRes.statusCode.getText();
-                  console.log('jsonpretty delete2');
                   const jsonPretty1 = await reqRes.jsonPretty.getText();
                   console.log('jsonpretty delete2 after');
                   expect(statusCode1).to.equal("Status: 200");
@@ -312,12 +317,6 @@ module.exports = () => {
             })
           }
           await findDOM2(100);
-          await new Promise( (resolve) => {
-            setTimeout( () => {
-              console.log('blocking');
-              return resolve();
-            }, 5000)
-          })
         } catch(err) {
           console.error(err);
         }
