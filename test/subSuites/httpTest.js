@@ -329,7 +329,7 @@ module.exports = () => {
               } catch(err) {
                 console.error(err)
               }
-            }, 700)
+            }, 700))
         } catch(err) {
           console.error(err);
         }
