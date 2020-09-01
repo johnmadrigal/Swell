@@ -206,13 +206,11 @@ module.exports = () => {
           const findDOM = (tries) => {
             return new Promise((resolve,reject) => {
               console.log(`Tries remaining ${tries}`)
-              if(tries <= 0) reject('failed promise');
+              if(tries <= 0) resolve();
               setTimeout(async () => {
                 try {
                   const statusCode = await reqRes.statusCode.getText();
-                  console.log('got to JSON pretty post');
                   const jsonPretty = await reqRes.jsonPretty.getText();
-                  console.log('after JSON pretty post');
                   expect(statusCode).to.equal("Status: 200");
                   expect(jsonPretty).to.include("JK Rowling");
                   resolve();
@@ -249,21 +247,42 @@ module.exports = () => {
           await urlAndClick("PUT", `{"author": "Ron Weasley", "pages": 400}`, "show");
           await sideBar.url.setValue("http://localhost:3000/book/HarryPotter");
           await addAndSend();
-          await new Promise((resolve) =>
-            setTimeout(async () => {
-              try {
-                const statusCode = await reqRes.statusCode.getText();
-                console.log('got to JSON pretty put');
-                const jsonPretty = await reqRes.jsonPretty.getText();
-                console.log('after JSON pretty put');
-                expect(statusCode).to.equal("Status: 200");
-                expect(jsonPretty).to.include("Ron Weasley");
-                resolve();
-              } catch(err) {
-                console.error(err)
-              }
-            }, 10000)
-          );
+          const findDOM = (tries) => {
+            return new Promise((resolve,reject) => {
+              console.log(`Tries remaining ${tries}`)
+              if(tries <= 0) resolve();
+              setTimeout(async () => {
+                try {
+                  const statusCode = await reqRes.statusCode.getText();
+                  console.log('got to JSON pretty put');
+                  const jsonPretty = await reqRes.jsonPretty.getText();
+                  console.log('after JSON pretty put');
+                  expect(statusCode).to.equal("Status: 200");
+                  expect(jsonPretty).to.include("Ron Weasley");
+                  resolve();
+                } catch(err) {
+                  await findDOM(--tries)
+                  resolve()
+                }
+              }, 1000)
+            })
+          }
+          await findDOM(100)
+          // await new Promise((resolve) =>
+            // setTimeout(async () => {
+            //   try {
+            //     const statusCode = await reqRes.statusCode.getText();
+            //     console.log('got to JSON pretty put');
+            //     const jsonPretty = await reqRes.jsonPretty.getText();
+            //     console.log('after JSON pretty put');
+            //     expect(statusCode).to.equal("Status: 200");
+            //     expect(jsonPretty).to.include("Ron Weasley");
+            //     resolve();
+            //   } catch(err) {
+            //     console.error(err)
+            //   }
+            // }, 10000)
+          // );
         } catch(err) {
           console.error(err)
         }
