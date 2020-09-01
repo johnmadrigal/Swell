@@ -275,15 +275,16 @@ module.exports = () => {
                   console.log('after JSON pretty delete');
                   expect(statusCode).to.equal("Status: 200");
                   expect(jsonPretty).to.include("Hermoine Granger");
+                  console.log('resolve delete')
                   return resolve();
                 } catch(err) {
                   await findDOM(--tries);
                   return resolve();
                 }
-              }, 1000)
+              }, 1500)
             })
           }
-          await findDOM(200);
+          await findDOM(100);
           await reqRes.removeBtn.click();
           await sideBar.chooseGet.click();
           await urlAndClick("GET");
