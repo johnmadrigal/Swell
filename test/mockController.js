@@ -79,6 +79,7 @@ bookController.deleteBook = (req, res, next) => {
       next(err);
     }
 		res.locals.books = books;
+		console.log('before delete next')
     next();
 	})
 }
