@@ -273,7 +273,7 @@ module.exports = () => {
               }, 1000)
             })
           }
-          await findDOM(100);
+          await findDOM(200);
           await reqRes.removeBtn.click();
           await sideBar.chooseGet.click();
           await urlAndClick("GET");
@@ -286,7 +286,9 @@ module.exports = () => {
               setTimeout(async () => {
                 try {
                   const statusCode = await reqRes.statusCode.getText();
+                  console.log('jsonpretty delete2');
                   const jsonPretty = await reqRes.jsonPretty.getText();
+                  console.log('jsonpretty delete2 after');
                   expect(statusCode).to.equal("Status: 200");
                   expect(jsonPretty).to.equal("[]");
                   return resolve();
@@ -297,7 +299,7 @@ module.exports = () => {
               }, 1000)
             })
           }
-          await findDOM2(100);
+          await findDOM2(200);
         } catch(err) {
           console.error(err);
         }
