@@ -288,42 +288,46 @@ module.exports = () => {
               }, 1000)
             })
           }
+          await findDOM(100);
+          await reqRes.removeBtn.click();
+          await sideBar.chooseGet.click();
+          await urlAndClick("GET");
+          await sideBar.url.setValue("http://localhost:3000/book");
+          await addAndSend();
+          const findDOM2 = attempts => {
+            return new Promise((resolve) => {
+              console.log(`Tries remaining for DELETE PT2 ${attempts}`)
+              if(attempts <= 0) return resolve();
+              setTimeout(async () => {
+                try {
+                  const statusCode1 = await reqRes.statusCode.getText();
+                  const jsonPretty1 = await reqRes.jsonPretty.getText();
+                  console.log('jsonpretty delete2 after');
+                  expect(statusCode1).to.equal("Status: 200");
+                  expect(jsonPretty1).to.equal("[]");
+                  console.log('jsonpretty', jsonPretty1);
+                  return resolve();
+                } catch(err) {
+                  await findDOM2(--attempts);
+                  return resolve();
+                }
+              }, 1000)
+            })
+          }
+          await findDOM2(100);
 
-         
-          // const findDOM2 = attempts => {
-          //   return new Promise((resolve) => {
-          //     console.log(`Tries remaining for DELETE PT2 ${attempts}`)
-          //     if(attempts <= 0) return resolve();
-          //     setTimeout(async () => {
-          //       try {
-          //         const statusCode1 = await reqRes.statusCode.getText();
-          //         const jsonPretty1 = await reqRes.jsonPretty.getText();
-          //         console.log('jsonpretty delete2 after');
-          //         expect(statusCode1).to.equal("Status: 200");
-          //         expect(jsonPretty1).to.equal("[]");
-          //         console.log('jsonpretty', jsonPretty1);
-          //         return resolve();
-          //       } catch(err) {
-          //         await findDOM2(--attempts);
-          //         return resolve();
-          //       }
-          //     }, 1000)
-          //   })
-          // }
-          // await findDOM2(100);
-
-          await new Promise((resolve) =>
-            setTimeout(async () => {
-              try {
-                const statusCode = await reqRes.statusCode.getText();
-                const jsonPretty = await reqRes.jsonPretty.getText();
-                expect(statusCode).to.equal("Status: 200");
-                expect(jsonPretty).to.equal("[]");
-                resolve();
-              } catch(err) {
-                console.error(err)
-              }
-            }, 700))
+          // await new Promise((resolve) =>
+          //   setTimeout(async () => {
+          //     try {
+          //       const statusCode = await reqRes.statusCode.getText();
+          //       const jsonPretty = await reqRes.jsonPretty.getText();
+          //       expect(statusCode).to.equal("Status: 200");
+          //       expect(jsonPretty).to.equal("[]");
+          //       resolve();
+          //     } catch(err) {
+          //       console.error(err)
+          //     }
+          //   }, 700))
         } catch(err) {
           console.error(err);
         }
