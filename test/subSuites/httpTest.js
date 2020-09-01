@@ -3,6 +3,8 @@ const chaiHttp = require("chai-http");
 const sideBar = require("../pageObjects/Sidebar.js");
 const reqRes = require("../pageObjects/ReqRes.js");
 const httpServer = require('../httpServer');
+require("dotenv").config();
+
 
 chai.use(chaiHttp);
 const expect = chai.expect;
@@ -102,7 +104,8 @@ module.exports = () => {
     });
 
     /***************** !! FOR BELOW TO WORK, YOU MUST ADD YOUR OWN MONGO URI TO A .ENV FILE WITH (MONGO_URI = "YOUR_URI") !! *****************/
-
+    //conditional to not run during travis env
+    if(!process.env.TRAVIS_LOCAL_API) {
     describe("local API", () => {
       before("CLEAR DB", (done) => {
         chai
@@ -319,6 +322,7 @@ module.exports = () => {
           console.error(err);
         }
       });
-    });
+    })
+    };
   });
 };
