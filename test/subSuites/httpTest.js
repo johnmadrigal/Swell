@@ -315,19 +315,6 @@ module.exports = () => {
             })
           }
           await findDOM2(100);
-
-          // await new Promise((resolve) =>
-          //   setTimeout(async () => {
-          //     try {
-          //       const statusCode = await reqRes.statusCode.getText();
-          //       const jsonPretty = await reqRes.jsonPretty.getText();
-          //       expect(statusCode).to.equal("Status: 200");
-          //       expect(jsonPretty).to.equal("[]");
-          //       resolve();
-          //     } catch(err) {
-          //       console.error(err)
-          //     }
-          //   }, 700))
         } catch(err) {
           console.error(err);
         }
@@ -335,36 +322,3 @@ module.exports = () => {
     });
   });
 };
-
-// await new Promise((resolve) =>
-// setTimeout(async () => {
-//   try {
-//     const statusCode = await reqRes.statusCode.getText();
-//     const jsonPretty = await reqRes.jsonPretty.getText();
-//     expect(statusCode).to.equal("Status: 200");
-//     expect(jsonPretty).to.include("Hermoine Granger");
-//     resolve();
-// await findDOM(100);
-// await reqRes.removeBtn.click();
-// await sideBar.chooseGet.click();
-// await urlAndClick("GET");
-// await sideBar.url.setValue("http://localhost:3000/book");
-// await addAndSend();
-//               } catch(err) {
-//                 console.error(err)
-//               }
-//             }, 700)
-//           );
-//           await new Promise((resolve) =>
-//             setTimeout(async () => {
-//               try {
-//                 const statusCode = await reqRes.statusCode.getText();
-//                 const jsonPretty = await reqRes.jsonPretty.getText();
-//                 expect(statusCode).to.equal("Status: 200");
-//                 expect(jsonPretty).to.equal("[]");
-//                 resolve();
-//               } catch(err) {
-//                 console.error(err)
-//               }
-//             }, 700)
-//           );
