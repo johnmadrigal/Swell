@@ -289,10 +289,10 @@ module.exports = () => {
           await urlAndClick("GET");
           await sideBar.url.setValue("http://localhost:3000/book");
           await addAndSend();
-          const findDOM2 = (tries) => {
+          const findDOM2 = (attempts) => {
             return new Promise((resolve,reject) => {
               console.log(`Tries remaining for DELETE PT2 ${tries}`)
-              if(tries <= 0) return resolve();
+              if(attempts <= 0) return resolve();
               setTimeout(async () => {
                 try {
                   const statusCode = await reqRes.statusCode.getText();
@@ -303,13 +303,18 @@ module.exports = () => {
                   expect(jsonPretty).to.equal("[]");
                   return resolve();
                 } catch(err) {
-                  await findDOM2(--tries);
+                  await findDOM2(--attempts);
                   return resolve();
                 }
               }, 1000)
             })
           }
-          await findDOM2(200);
+          await findDOM2(100);
+          await new Promise( (resolve) => {
+            setTimeout( () => {
+              resolve();
+            }, 1000)
+          })
         } catch(err) {
           console.error(err);
         }
