@@ -132,7 +132,7 @@ module.exports = () => {
                   await findDOM(--tries)
                   resolve();
                 }
-              }, 0)
+              }, 1000)
             })
           }
           await findDOM(30)
@@ -182,7 +182,7 @@ module.exports = () => {
                   findDOM(--tries)
                   resolve()
                 }
-              }, 0)
+              }, 1000)
             })
           }
           await findDOM(100)
