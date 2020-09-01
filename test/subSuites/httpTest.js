@@ -281,7 +281,7 @@ module.exports = () => {
                   await findDOM(--tries);
                   return resolve();
                 }
-              }, 1500)
+              }, 1000)
             })
           }
           await findDOM(100);
@@ -314,7 +314,7 @@ module.exports = () => {
           await findDOM2(100);
           await new Promise( (resolve) => {
             setTimeout( () => {
-              resolve();
+              return resolve();
             }, 5000)
           })
         } catch(err) {
