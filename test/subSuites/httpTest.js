@@ -291,7 +291,7 @@ module.exports = () => {
           await addAndSend();
           const findDOM2 = (attempts) => {
             return new Promise((resolve,reject) => {
-              console.log(`Tries remaining for DELETE PT2 ${tries}`)
+              console.log(`Tries remaining for DELETE PT2 ${attempts}`)
               if(attempts <= 0) return resolve();
               setTimeout(async () => {
                 try {
