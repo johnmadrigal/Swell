@@ -179,7 +179,7 @@ module.exports = () => {
                   resolve();
                 } catch (err) {
                   console.log('err from promise try', err)
-                  findDOM(--tries)
+                  await findDOM(--tries)
                   resolve()
                 }
               }, 1000)
