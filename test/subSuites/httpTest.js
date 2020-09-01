@@ -314,6 +314,7 @@ module.exports = () => {
           await findDOM2(100);
           await new Promise( (resolve) => {
             setTimeout( () => {
+              console.log('blocking');
               return resolve();
             }, 5000)
           })
