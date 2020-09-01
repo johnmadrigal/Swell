@@ -13,7 +13,7 @@ const graphqlTest = require('./subSuites/graphqlTest')
 const app = require("./testApp");
 
 describe("Electron Tests", function () {
-  this.timeout(60000);
+  this.timeout(80000);
   before(function () {
     return app.start();
   });
