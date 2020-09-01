@@ -276,9 +276,7 @@ module.exports = () => {
               setTimeout(async () => {
                 try {
                   const statusCode = await reqRes.statusCode.getText();
-                  console.log('got to JSON pretty delete');
                   const jsonPretty = await reqRes.jsonPretty.getText();
-                  console.log('after JSON pretty delete');
                   expect(statusCode).to.equal("Status: 200");
                   expect(jsonPretty).to.include("Hermoine Granger");
                   console.log('resolve delete')
@@ -290,12 +288,8 @@ module.exports = () => {
               }, 1000)
             })
           }
-          await findDOM(100);
-          await reqRes.removeBtn.click();
-          await sideBar.chooseGet.click();
-          await urlAndClick("GET");
-          await sideBar.url.setValue("http://localhost:3000/book");
-          await addAndSend();
+
+         
           // const findDOM2 = attempts => {
           //   return new Promise((resolve) => {
           //     console.log(`Tries remaining for DELETE PT2 ${attempts}`)
@@ -337,3 +331,36 @@ module.exports = () => {
     });
   });
 };
+
+// await new Promise((resolve) =>
+// setTimeout(async () => {
+//   try {
+//     const statusCode = await reqRes.statusCode.getText();
+//     const jsonPretty = await reqRes.jsonPretty.getText();
+//     expect(statusCode).to.equal("Status: 200");
+//     expect(jsonPretty).to.include("Hermoine Granger");
+//     resolve();
+// await findDOM(100);
+// await reqRes.removeBtn.click();
+// await sideBar.chooseGet.click();
+// await urlAndClick("GET");
+// await sideBar.url.setValue("http://localhost:3000/book");
+// await addAndSend();
+//               } catch(err) {
+//                 console.error(err)
+//               }
+//             }, 700)
+//           );
+//           await new Promise((resolve) =>
+//             setTimeout(async () => {
+//               try {
+//                 const statusCode = await reqRes.statusCode.getText();
+//                 const jsonPretty = await reqRes.jsonPretty.getText();
+//                 expect(statusCode).to.equal("Status: 200");
+//                 expect(jsonPretty).to.equal("[]");
+//                 resolve();
+//               } catch(err) {
+//                 console.error(err)
+//               }
+//             }, 700)
+//           );
