@@ -118,6 +118,7 @@ module.exports = () => {
             try {
               const statusCode = await reqRes.statusCode.getText();
               const jsonPretty = await reqRes.jsonPretty.getText();
+              console.log('jsonPretty', jsonPretty);
               expect(statusCode).to.equal("Status: 400");
               expect(jsonPretty).to.include(`Did you mean`);
               resolve();
