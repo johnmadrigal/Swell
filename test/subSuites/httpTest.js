@@ -256,6 +256,7 @@ module.exports = () => {
                   const jsonPretty = await reqRes.jsonPretty.getText();
                   expect(statusCode).to.equal("Status: 200");
                   expect(jsonPretty).to.include("Ron Weasley");
+                  console.log('going to resolve');
                   return resolve();
                 } catch(err) {
                   await findDOM(--tries)
