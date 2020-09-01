@@ -297,9 +297,7 @@ module.exports = () => {
               setTimeout(async () => {
                 try {
                   const statusCode = await reqRes.statusCode.getText();
-                  console.log('got to JSON pretty patch');
                   const jsonPretty = await reqRes.jsonPretty.getText();
-                  console.log('after JSON pretty patch');
                   expect(statusCode).to.equal("Status: 200");
                   expect(jsonPretty).to.include("Hermoine Granger");
                   return resolve();
