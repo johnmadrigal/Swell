@@ -113,23 +113,26 @@ module.exports = () => {
           await sideBar.url.setValue("http://localhost:3000/book");
           await addAndSend();
           const findDOM = (tries) => {
-            return new Promise((resolve,reject) => {
+            return new Promise( (resolve, reject) => {
               console.log(`Tries remaining ${tries}`)
-              if(tries === 0) reject('failed promise');
+              if(tries <= 0) reject('failed promise');
               setTimeout(async () => {
                 try {
                   const statusCode = await reqRes.statusCode.getText();
                   console.log('got to JSON pretty get');
                   const jsonPretty = await reqRes.jsonPretty.getText();
                   console.log('after jsonPretty get');
+                  console.log('jsonPretty',jsonPretty)
                   expect(statusCode).to.equal("Status: 200");
                   expect(jsonPretty).to.equal("[]");
                   resolve();
+                  console.log('after resolve')
                 } catch (err) {
                   console.log('err from promise try', err)
-                  findDOM(--tries)
+                  await findDOM(--tries)
+                  resolve();
                 }
-              }, 1000)
+              }, 0)
             })
           }
           await findDOM(30)
@@ -177,11 +180,12 @@ module.exports = () => {
                 } catch (err) {
                   console.log('err from promise try', err)
                   findDOM(--tries)
+                  resolve()
                 }
-              }, 1000)
+              }, 0)
             })
           }
-          await findDOM(35)
+          await findDOM(100)
           // await new Promise((resolve) =>
           //   setTimeout(async () => {
           //     try {
@@ -198,7 +202,7 @@ module.exports = () => {
           //   }, 10000)
           // );
         } catch(err) {
-          console.error('error in non-post', err)
+          console.error('error in non-post', err);
         }
       });
 
