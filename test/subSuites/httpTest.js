@@ -314,7 +314,7 @@ module.exports = () => {
           await new Promise( (resolve) => {
             setTimeout( () => {
               resolve();
-            }, 1000)
+            }, 5000)
           })
         } catch(err) {
           console.error(err);
