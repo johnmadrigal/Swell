@@ -301,6 +301,7 @@ module.exports = () => {
                   console.log('jsonpretty delete2 after');
                   expect(statusCode).to.equal("Status: 200");
                   expect(jsonPretty).to.equal("[]");
+                  console.log('jsonpretty', jsonPretty);
                   return resolve();
                 } catch(err) {
                   await findDOM2(--attempts);
