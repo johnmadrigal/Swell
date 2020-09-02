@@ -128,6 +128,7 @@ module.exports = () => {
               const statusCode = await reqRes.statusCode.getText();
               const jsonPretty = await reqRes.jsonPretty.getText();
               expect(statusCode).to.equal("Status: 400");
+              console.log('jsonPretty', jsonPretty)
               expect(jsonPretty).to.include(`GRAPHQL_VALIDATION_FAILED`);
               resolve();
             } catch(err) {
